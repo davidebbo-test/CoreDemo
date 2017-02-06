@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.ApplicationInsights;
 
 namespace CoreDemo.Controllers
 {
@@ -16,6 +17,8 @@ namespace CoreDemo.Controllers
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
+            var telemetry = new TelemetryClient();
+            telemetry.TrackEvent("Hello");
 
             return View();
         }
@@ -24,7 +27,8 @@ namespace CoreDemo.Controllers
         {
             ViewData["Message"] = "Your contact page.";
 
-            return View();
+            throw new Exception("zzz");
+            //return View();
         }
 
         public IActionResult Error()
