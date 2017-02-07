@@ -15,6 +15,7 @@ namespace CoreDemo
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
+                .UseAzureAppServices()
                 .UseStartup<Startup>()
                 .UseApplicationInsights()
                 .Build();
