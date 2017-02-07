@@ -7,6 +7,7 @@ using Microsoft.ApplicationInsights;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Logging;
 
 namespace CoreDemo.Controllers
 {
@@ -17,15 +18,21 @@ namespace CoreDemo.Controllers
     }
     public class HomeController : Controller
     {
-        IOptions<MyConfig> _config;
+        private readonly IOptions<MyConfig> _config;
+        private readonly ILogger _logger;
 
-        public HomeController(IOptions<MyConfig> config)
+        public HomeController(IOptions<MyConfig> config, ILoggerFactory loggerFactory)
         {
             _config = config;
+            _logger = loggerFactory.CreateLogger<HomeController>();
         }
 
         public IActionResult Index()
         {
+            _logger.LogInformation("Some information log");
+            _logger.LogWarning("This is a warning");
+            _logger.LogError("This is an error");
+
             return View();
         }
 
