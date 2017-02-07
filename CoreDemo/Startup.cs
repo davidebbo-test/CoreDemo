@@ -27,6 +27,11 @@ namespace CoreDemo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add functionality to inject IOptions<T>
+            services.AddOptions();
+
+            // Add our Config object so it can be injected
+            services.Configure<Controllers.MyConfig>(Configuration);
             // Add framework services.
             services.AddMvc();
         }
